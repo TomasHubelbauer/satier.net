@@ -16,3 +16,60 @@
   - http://www.foodstandards.gov.au/science/monitoringnutrients/afcd/Pages/default.aspx
   - http://www.foodstandards.gov.au/science/monitoringnutrients/ausnut/foodnutrient/Pages/default.aspx
   - https://www.who.int/nutrition/databases/en
+
+## Design
+
+- Allow free data entry in case of unknown values / missing foods for later revision
+- Provide a global database and a user-custom database for overrides / custom foods
+- Distinguish foods from the main index, my database and from other users' databases
+- Support nutritional values tables of the various countries
+
+## Schema
+
+Here are a few examples of foods entries as they might end up looking in the database:
+
+```jsonc
+{
+  "id": 1,
+  "type": "package",
+  "brand": "Albert",
+  "name": "Fresh Bistro",
+  "variant": "anglický s vejcem a slaninou",
+  "energy": {
+    "amount": 1141,
+    "unit": "kj"
+  },
+  "label": { // https://en.wikipedia.org/wiki/List_of_macronutrients
+    "type": "czech-republic", // per 100 g
+    "proteins": 10,
+    "carbs": {
+      "total": 27,
+      "sugars": 2
+    },
+    "lipids": {
+      "total": 14,
+      "saturated": 5
+    },
+    "salt": 1,
+    "phe": 0.48
+  }
+}
+```
+
+```jsonc
+{
+  "id": 1,
+  "type": "ingredient",
+  "label": {} // …
+}
+```
+
+```jsonc
+{
+  "id": 1,
+  "type": "composition",
+  "ingredients": [
+    // …
+  ]
+}
+```
