@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+    # Limit to the `master` branch
+    - master
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build and deploy
+      run: |
+        set -x
+        # Build the application
+        mkdir build
+        echo "<h1>Satier</h1>" > build/index.html
+        # Deploy to the application server
+        mkdir ~/.ssh
+        touch ~/.ssh/known_hosts
+        ssh-keyscan 172.105.81.29 >> ~/.ssh/known_hosts
+        echo "${{ secrets.SSH_PASSWORD }}" > pass
+        sshpass -p $(cat pass) rsync -avh build/ root@172.105.81.29:/var/www/satier.net --delete
