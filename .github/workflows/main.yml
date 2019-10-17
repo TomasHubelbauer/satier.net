@@ -12,8 +12,9 @@ jobs:
       run: |
         set -x
         # Build the application
-        mkdir build
-        echo "<h1>Satier</h1>" > build/index.html
+        cd fe
+        npm install
+        npm run build
         # Deploy to the application server
         mkdir ~/.ssh
         touch ~/.ssh/known_hosts
