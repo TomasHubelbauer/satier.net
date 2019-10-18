@@ -4,6 +4,8 @@
 
 ## To-Do
 
+- Configure the 404 page in the NGinx configuration
+- Fix the `react-snap` warning about 404 page title missing `404`
 - Import/connect food database values
   - https://world.openfoodfacts.org
   - https://www.foodrepo.org
