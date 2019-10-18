@@ -4,6 +4,7 @@
 
 ## To-Do
 
+- Set up CD for the BE and configure NGinx to serve `/api` from it
 - Configure the 404 page in the NGinx configuration
 - Fix the `react-snap` warning about 404 page title missing `404`
 - Import/connect food database values
