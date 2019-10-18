@@ -4,6 +4,7 @@
 
 ## To-Do
 
+- Upgrade TypeScript and use the Elvis operator where applicable
 - Set up CD for the BE and configure NGinx to serve `/api` from it
 - Configure the 404 page in the NGinx configuration
 - Fix the `react-snap` warning about 404 page title missing `404`

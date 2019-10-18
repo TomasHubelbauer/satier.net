@@ -1,0 +1,13 @@
+.HomePage {
+  .editor {
+    display: flex;
+
+    input {
+      flex: 1;
+    }
+
+    button {
+      margin-left: 1ex;
+    }
+  }
+}

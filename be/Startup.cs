@@ -27,6 +27,11 @@ namespace TomasHubelbauer.Satier
         {
           await context.Response.WriteAsync("Hello World!");
         });
+
+        endpoints.MapPost("/api/recordFood", async context =>
+        {
+          await context.Response.WriteAsync("okay");
+        });
       });
     }
   }

@@ -1,46 +1,19 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import HomePage from './HomePage';
+import TestPage from './TestPage';
 
-const App: React.FC = () => {
-  const [api, setApi] = useState('');
-  useEffect(() => {
-    void async function () {
-      const response = await fetch('/api');
-      const text = await response.text();
-      setApi(text);
-
-    }()
-  }, []);
-
+export default function App() {
   switch (window.location.pathname) {
-    case '/': {
-      return (
-        <>
-          <h1>
-            <img alt="logo" src="logo.png" />
-            Satier
-          </h1>
-          <p>API response: {api}</p>
-          <a href="./test">Test</a>
-        </>
-      );
-    }
-    case '/test': {
-      return (
-        <>
-          <h1>Test</h1>
-          <p>This is a test page.</p>
-        </>
-      );
-    }
+    case '/': return <HomePage />;
+    case '/test': return <TestPage />;
     default: {
       return (
         <>
           <h1>404</h1>
+          <p>This doesn't seem to be a valid Satier page.</p>
         </>
       );
     }
   }
 }
-
-export default App;
