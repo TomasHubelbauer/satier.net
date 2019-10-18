@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://satier.net",
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@types/jest": "24.0.19",
     "@types/node": "12.11.1",

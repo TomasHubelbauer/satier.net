@@ -23,7 +23,7 @@ namespace TomasHubelbauer.Satier
 
       app.UseEndpoints(endpoints =>
       {
-        endpoints.MapGet("/", async context =>
+        endpoints.MapGet("/api", async context =>
         {
           await context.Response.WriteAsync("Hello World!");
         });

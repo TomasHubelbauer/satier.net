@@ -1,7 +1,17 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const App: React.FC = () => {
+  const [api, setApi] = useState('');
+  useEffect(() => {
+    void async function () {
+      const response = await fetch('/api');
+      const text = await response.text();
+      setApi(text);
+
+    }()
+  }, []);
+
   switch (window.location.pathname) {
     case '/': {
       return (
@@ -10,6 +20,7 @@ const App: React.FC = () => {
             <img alt="logo" src="logo.png" />
             Satier
           </h1>
+          <p>API response: {api}</p>
           <a href="./test">Test</a>
         </>
       );
