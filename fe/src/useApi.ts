@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 type ProgressOperation<T> = { state: 'progress'; promise: Promise<T>; };
 type SuccessOperation<T> = { state: 'success'; result: T; };
@@ -10,15 +10,6 @@ export type Operation<T> =
   | ErrorOperation
   ;
 
-// (args: string[]): RequestInit
-const api = {
-  recordFood: (args: any[]) => null
-};
-
-void api;
-
-// TODO: Derive from `typeof api` or the other way around or something
-// https://stackoverflow.com/q/58457739/2715716
 type Api = {
   recordFood: (name: string) => Operation<object>;
   deleteFood: (id: number) => Operation<void>;
@@ -26,13 +17,31 @@ type Api = {
 
 export default function useApi() {
   const [, forceUpdate] = useState();
-  return new Proxy<Api>(
+  const { current: webSocket } = useRef(new WebSocket('/api'));
+  useEffect(() => {
+    webSocket.addEventListener('open', () => console.log('open'));
+    webSocket.addEventListener('message', () => console.log('message'));
+    webSocket.addEventListener('close', () => console.log('close'));
+    webSocket.addEventListener('error', () => console.log('error'));
+  }, []);
+
+  const proxy = useRef(new Proxy<Api>(
     {} as Api,
     {
       get(_target, p, _receiver) {
         return function () {
-          // TODO: Look up the corresponding arguments to RequestInit mapper
-          const promise = fetch(`/api/${String(p)}`, { body: JSON.stringify(arguments) }).then(response => response.text());
+          // Stringify only the argument values because it is impossible to get the argument names at runtime
+          // https://github.com/TomasHubelbauer/typescript-api-proxy
+          const _promise = fetch(`/api/${String(p)}`, { body: JSON.stringify(arguments) }).then(response => response.text());
+          void _promise;
+
+          // TODO
+          const method = String(p);
+          const args = Array.from(arguments);
+          const promise = new Promise((resolve, reject) => {
+            // TODO: Attach a correlation ID and resolve/reject based on incoming messages with that same correlation ID
+            webSocket.send(`${method}(${JSON.stringify(args)})`);
+          });
 
           // Provide access to the promise to avoid hooking into its flow
           let operation: Operation<unknown> = { state: 'progress', promise };
@@ -57,5 +66,7 @@ export default function useApi() {
         };
       }
     }
-  );
+  ));
+
+  return proxy.current;
 }

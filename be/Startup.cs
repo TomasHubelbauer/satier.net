@@ -1,6 +1,8 @@
+using System.Net.WebSockets;
+using System.Text;
+using System.Threading;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -14,24 +16,31 @@ namespace TomasHubelbauer.Satier
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+      var webSocketOptions = new WebSocketOptions();
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
+        webSocketOptions.AllowedOrigins.Add("https://localhost:3000");
+      }
+      else
+      {
+        webSocketOptions.AllowedOrigins.Add("https://satier.net");
       }
 
-      app.UseRouting();
-
-      app.UseEndpoints(endpoints =>
+      app.UseWebSockets(webSocketOptions);
+      app.Use(async (context, next) =>
       {
-        endpoints.MapGet("/api", async context =>
+        if (context.Request.Path == "/api" && context.WebSockets.IsWebSocketRequest)
         {
-          await context.Response.WriteAsync("Hello World!");
-        });
+          var webSocket = await context.WebSockets.AcceptWebSocketAsync();
 
-        endpoints.MapPost("/api/recordFood", async context =>
+          // TODO: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/websockets?view=aspnetcore-3.0#send-and-receive-messages
+          await webSocket.SendAsync(Encoding.UTF8.GetBytes("Hello, World!"), WebSocketMessageType.Text, true, CancellationToken.None);
+        }
+        else
         {
-          await context.Response.WriteAsync("okay");
-        });
+          await next();
+        }
       });
     }
   }
