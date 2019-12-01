@@ -4,22 +4,27 @@
 
 ## To-Do
 
-- Upgrade TypeScript and use the Elvis operator where applicable
-- Set up CD for the BE and configure NGinx to serve `/api` from it
-- Configure the 404 page in the NGinx configuration
-- Fix the `react-snap` warning about 404 page title missing `404`
-- Import/connect food database values
-  - https://world.openfoodfacts.org
-  - https://www.foodrepo.org
-  - https://fdc.nal.usda.gov
-  - https://www.nutritionvalue.org
-  - https://nutritiondata.self.com
-  - https://www.nutritionix.com
-  - https://www.efsa.europa.eu/en/microstrategy/food-composition-data
-  - https://data.europa.eu/euodp/en/data/dataset/food-composition-database
-  - http://www.foodstandards.gov.au/science/monitoringnutrients/afcd/Pages/default.aspx
-  - http://www.foodstandards.gov.au/science/monitoringnutrients/ausnut/foodnutrient/Pages/default.aspx
-  - https://www.who.int/nutrition/databases/en
+### Upgrade TypeScript and use the Elvis operator where applicable
+
+### Set up CD for the BE and configure NGinx to serve `/api` from it
+
+### Configure the 404 page in the NGinx configuration
+
+### Fix the `react-snap` warning about 404 page title missing `404`
+
+### Import/connect food database values
+
+- https://world.openfoodfacts.org
+- https://www.foodrepo.org
+- https://fdc.nal.usda.gov
+- https://www.nutritionvalue.org
+- https://nutritiondata.self.com
+- https://www.nutritionix.com
+- https://www.efsa.europa.eu/en/microstrategy/food-composition-data
+- https://data.europa.eu/euodp/en/data/dataset/food-composition-database
+- http://www.foodstandards.gov.au/science/monitoringnutrients/afcd/Pages/default.aspx
+- http://www.foodstandards.gov.au/science/monitoringnutrients/ausnut/foodnutrient/Pages/default.aspx
+- https://www.who.int/nutrition/databases/en
 
 ## Design
 
