@@ -26,6 +26,10 @@
 - http://www.foodstandards.gov.au/science/monitoringnutrients/ausnut/foodnutrient/Pages/default.aspx
 - https://www.who.int/nutrition/databases/en
 
+### Use React Helmet
+
+Ensure it gets renderer as a part of the prerender.
+
 ## Design
 
 - Allow free data entry in case of unknown values / missing foods for later revision
