@@ -14,6 +14,7 @@
 
 ### Import/connect food database values
 
+- https://opendata.stackexchange.com/a/274
 - https://world.openfoodfacts.org
 - https://www.foodrepo.org
 - https://fdc.nal.usda.gov
